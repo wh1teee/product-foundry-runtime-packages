@@ -1,0 +1,42 @@
+name: Registry authority
+
+on:
+  pull_request:
+    paths:
+      - "registry/**"
+      - ".github/**"
+      - "tools/**"
+      - "README.md"
+  push:
+    branches: [main]
+    paths:
+      - "registry/**"
+      - ".github/**"
+      - "tools/**"
+      - "README.md"
+
+permissions:
+  contents: read
+
+jobs:
+  authority:
+    name: Registry authority
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      REGISTRY_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+      REGISTRY_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          ref: ${{ env.REGISTRY_SOURCE_SHA }}
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24.18.1"
+      - name: Unit proof
+        run: node --test tools/verify-registry-pr.test.mjs
+      - name: Verify exact registry mutation
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node tools/verify-registry-pr.mjs "$REGISTRY_BASE_SHA" "$REGISTRY_SOURCE_SHA"
