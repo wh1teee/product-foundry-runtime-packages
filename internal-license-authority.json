@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "authorityId": "product-foundry-internal-only-v1",
+  "decision": {
+    "id": "foundry-fm3",
+    "status": "CLOSED",
+    "policy": "INTERNAL_ONLY",
+    "ownership": "PROPRIETARY",
+    "externalLicenseGrant": false,
+    "publicTechnicalAccessibilityGrantsLicense": false
+  },
+  "scope": {
+    "packageNamespace": "@product-foundry/",
+    "packageFamilies": [
+      "@product-foundry/abuse-rate-limit",
+      "@product-foundry/access-engine",
+      "@product-foundry/admin-evidence-presentation",
+      "@product-foundry/audit-evidence",
+      "@product-foundry/auth-origin-policy",
+      "@product-foundry/auth-totp",
+      "@product-foundry/deterministic-oracle",
+      "@product-foundry/errors",
+      "@product-foundry/exact-release-provenance",
+      "@product-foundry/http-request-context",
+      "@product-foundry/idempotency-key-validation",
+      "@product-foundry/money",
+      "@product-foundry/notifications-core",
+      "@product-foundry/notifications-email",
+      "@product-foundry/notifications-push",
+      "@product-foundry/notifications-telegram",
+      "@product-foundry/observability-sentry",
+      "@product-foundry/observability-telemetry",
+      "@product-foundry/opaque-credential-lifecycle",
+      "@product-foundry/openapi-toolchain",
+      "@product-foundry/payments",
+      "@product-foundry/qualification-runtime",
+      "@product-foundry/route-state-visual-evidence"
+    ],
+    "futurePackageDefault": "INTERNAL_ONLY"
+  },
+  "immutability": {
+    "existingPackageVersionsRemainImmutable": true,
+    "republishForLicenseMetadata": false
+  },
+  "override": {
+    "requiresNewExplicitHumanDecision": true
+  },
+  "consumerVerification": {
+    "sourceRepository": "wh1teee/product-foundry",
+    "distributionRepository": "wh1teee/product-foundry-runtime-packages",
+    "registryPath": "registry/",
+    "authorityPath": "internal-license-authority.json",
+    "packageTarballTemplate": "https://github.com/wh1teee/product-foundry-runtime-packages/releases/download/{artifactId}-v{version}/product-foundry-{artifactId}-{version}.tgz",
+    "transport": "immutable_git_revision"
+  }
+}
